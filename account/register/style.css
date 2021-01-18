@@ -1,0 +1,53 @@
+body {
+    position: relative;
+    background-image: url(../../images/background_register.svg);
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+#registerBody {
+    position: relative;
+    z-index: 2;
+}
+
+#bgLogin {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.passwordInput {
+    position: relative;
+}
+
+#showPassword, #showPasswordAgain {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 5%;
+}
+
+.showed {
+    color: #3A9BD1;
+}
+
+.dropdown-animation {
+    animation: growDown .2s;
+    transform-origin: top center;
+}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}

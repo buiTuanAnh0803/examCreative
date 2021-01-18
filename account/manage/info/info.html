@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Creative - User Management</title>
+    <link rel="stylesheet" href="../../../bootstrap/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2aeb2cddaa.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="header-nav">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../images/logo.png" alt="logo-brand" width="110px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon --dark"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active px-3">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home pr-2"></i>
+                            <span class="menu-text">Trang chủ</span>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search pr-2"></i>
+                            <span class="menu-text">Tìm kiếm</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-flag pr-2"></i>
+                            <span class="menu-text">Nổi bật</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-animation" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Khoá học</a>
+                            <a class="dropdown-item" href="#">Đề thi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Trường học</a>
+                            <a class="dropdown-item" href="#">Trung tâm</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-plus-square pr-2"></i>
+                            <span class="menu-text">Tạo</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-animation" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-file-alt pr-2"></i>
+                                Đề thi
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="fab fa-discourse pr-2"></i>
+                                Khoá học
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-align-left pr-2"></i>
+                            <span class="menu-text">Diễn đàn</span>
+                        </a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" id="search-form">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <div class="row m-0">
+        <div id="mySidenav" class="sidenav col-3" style="height: 700px;">
+            <div id="accountSettings" class="mt-4">
+                <div class="row justify-content-center mx-auto">
+                    <img src="../../../images/avatar-person.svg" alt="avatar" width="40%">
+                </div>
+                <div class="row justify-content-center py-4">
+                    <span id="userNameLeft" class="text-dark"></span>
+                </div>
+                <ul class="nav d-flex flex-column" style="margin-inline-start: 0;">
+                    <li class="nav-item">
+                        <a class="nav-link bg-light rounded-top pr-2" href="info.html">
+                            <i class="fas fa-user-cog" style="width: 15px; margin-right: 5px;"></i>
+                            Thông tin tài khoản
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-light pr-2" href="../course/courseManage.html">
+                            <i class="fas fa-comments" style="width: 15px; margin-right: 5px;"></i>
+                            Quản lý khoá học
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-light rounded-bottom pr-2" href="../exam/examManage.html">
+                            <i class="fas fa-envelope-open-text" style="width: 15px; margin-right: 5px;"></i>
+                            Quản lý đề thi
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a class="nav-link position-absolute px-1 d-flex align-items-center" href="../../../index.html"
+                style="bottom: 0;" onclick="logout()">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                Đăng xuất
+            </a>
+        </div>
+        <div id="main" class="border-left col-9 py-5">
+            <div class="row pb-5">
+                <div id="titleText" class="container font-weight-bold" style="font-size: 30px;">
+                    Thông tin tài khoản
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-3">
+                    <span class="label-text">
+                        Email:
+                    </span>
+                </div>
+                <div class="col-9">
+                    <strong id="emailShow"></strong>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-3 label-text">
+                    <span class="label-text">
+                        Tên hiển thị:
+                    </span>
+                </div>
+                <div class="col-9">
+                    <strong id="userNameShow"></strong>
+                </div>
+            </div>
+            <div class="row align-items-center py-2">
+                <div class="col-3">
+                    <span class="label-text">
+                        Password:
+                    </span>
+                </div>
+                <div class="col-9">
+                    <div id="passwordShow" class="mr-5">
+                        <input type="password" class="form-control" id="passwordShowInput" disabled>
+                        <i class="fas fa-eye" id="showPassword" onclick="showPassword()"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../../bootstrap/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../../bootstrap/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+    <script src="../../../bootstrap/popper.min.js"></script>
+    <script src="manageAccount.js"></script>
+</body>
+
+</html>

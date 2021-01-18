@@ -1,0 +1,221 @@
+@media only screen and (max-width: 1140px) and (min-width: 992px) {
+    .menu-text {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .answer-list-conclusion {
+        display: none;
+    }
+    .submit-block {
+        float: right;
+        padding-right: 10px;
+    }
+    .time-block {
+        float: left;
+    }
+    .time {
+        max-width: 100%;
+        width: 100%;
+        display: inline-block !important;
+        flex: none !important;
+    }
+    #main {
+        padding-bottom: 54px;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+#search-form {
+    flex-wrap: nowrap;
+}
+
+.dropdown-animation {
+    animation: growDown .2s;
+    transform-origin: top center;
+}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+
+/* The side navigation menu */
+
+#sidenavBtn {
+    position: fixed;
+    cursor: pointer;
+    float: left;
+    top: 110px;
+    left: -22px;
+    transform: rotate(-90deg);
+    font-size: 12px;
+}
+
+.sidenav {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.sidenav * {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* The navigation menu links */
+
+.sidenav label, .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav label {
+    font-size: 16px;
+    padding-left: 5%;
+}
+
+.sidenav input {
+    margin-left: 5%;
+    width: 90%;
+}
+
+/* When you mouse over the navigation links, change their color */
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+
+.sidenav .closebtn {
+    position: absolute;
+    top: -2%;
+    right: 2%;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#autoLogin {
+    top: 20%;
+    left: -43%;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+    padding-bottom: 162px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 12px;
+    }
+}
+
+.template-title {
+    font-size: 14px;
+}
+
+.template-muted {
+    font-size: 12px;
+}
+
+.template-item:hover {
+    cursor: pointer;
+    background-color: rgb(180, 180, 180);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* ============================================================================================================= */
+
+.description {
+    border-bottom: 2px solid gainsboro;
+}
+
+#examDesc {
+    font-size: 10px;
+    font-weight: bold;
+    color: gray;
+}
+
+.additional svg {
+    height: 13px;
+    padding-right: 5px;
+    padding-left: 10px;
+}
+
+.additional {
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.desviews {
+    border-bottom: 2px solid darkgray;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.question-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.answer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.answered_item {
+    display: inline-block;
+    width: 9%;
+    text-align: center;
+    margin: auto;
+    background-color: darkgray;
+    border-radius: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.clock_h, .clock_m, .clock_s {
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 3px;
+}

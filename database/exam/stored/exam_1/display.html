@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Creative - Exam</title>
+    <link rel="stylesheet" href="../../../../bootstrap/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2aeb2cddaa.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="header-nav">
+            <a class="navbar-brand" href="../../../../index.html">
+                <img src="../../../../images/logo.png" alt="logo-brand" width="110px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon --dark"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active px-3">
+                        <a class="nav-link" href="../../../../index.html">
+                            <i class="fas fa-home pr-2"></i>
+                            <span class="menu-text">Trang chủ</span>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search pr-2"></i>
+                            <span class="menu-text">Tìm kiếm</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-flag pr-2"></i>
+                            <span class="menu-text">Nổi bật</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-animation" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Khoá học</a>
+                            <a class="dropdown-item" href="#">Đề thi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Trường học</a>
+                            <a class="dropdown-item" href="#">Trung tâm</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-plus-square pr-2"></i>
+                            <span class="menu-text">Tạo</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-animation" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-file-alt pr-2"></i>
+                                Đề thi
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="fab fa-discourse pr-2"></i>
+                                Khoá học
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-align-left pr-2"></i>
+                            <span class="menu-text">Diễn đàn</span>
+                        </a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" id="search-form">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" class="form-control" id="loginEmail" onfocus="removeErr('email')">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Mật khẩu</label>
+                <input type="password" class="form-control" id="loginPassword" onfocus="removeErr('password')">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="autoLogin">
+                <label class="form-check-label" for="autoLogin" style="font-size: 12px; line-height: 1.5rem;">
+                    Tự động đăng nhập
+                </label>
+            </div>
+            <button type="button" class="btn btn-primary" style="position: relative ;left: 5%"
+                onclick="manualLogin()">Đăng nhập</button>
+            <p style="position: relative; left: 5%; top: 0; font-size: 12px;" class="text-muted py-3">
+                Chưa có tài khoản?
+                <a href="account/register/index.html" class="text-light"
+                    style="font-size: 12px; display: inline; padding: 0; margin: 5px;">Đăng ký</a> ngay
+            </p>
+        </form>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+    <button id="sidenavBtn" class="btn btn-dark px-2 font-weight-bold" onclick="openNav()">Tài khoản</button>
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <div id="main">
+        <div id="display" class="container pt-4"></div>
+    </div>
+
+    <script src="../../../../bootstrap/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../../../bootstrap/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+    <script src="../../../../bootstrap/popper.min.js"></script>
+    <script src="show.js"></script>
+</body>
+
+</html>
