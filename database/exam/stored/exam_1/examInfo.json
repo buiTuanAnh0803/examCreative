@@ -1,0 +1,136 @@
+{
+    "email": "test@test",
+    "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
+    "examType": "Trắc nghiệm",
+    "dateRelease": "27-6-2020",
+    "attendantAmount": 291,
+    "attendantPurpose": "Ôn tập",
+    "testDuration": {
+        "hour": 0,
+        "minute": 50,
+        "second": 0
+    },
+    "questionAmount": 30,
+    "answerList" : [
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "a"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "b"
+        },
+        {
+            "choose": "",
+            "answer": "d"
+        },
+        {
+            "choose": "",
+            "answer": "c"
+        }
+    ]
+}

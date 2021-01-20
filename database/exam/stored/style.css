@@ -204,6 +204,7 @@ a:hover {
 }
 
 .answered_item {
+    cursor: pointer;
     display: inline-block;
     width: 9%;
     text-align: center;
@@ -212,6 +213,7 @@ a:hover {
     border-radius: 5px;
     margin-top: 2px;
     margin-bottom: 2px;
+    color: #212529
 }
 
 .clock_h, .clock_m, .clock_s {

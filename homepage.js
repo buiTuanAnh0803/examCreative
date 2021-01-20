@@ -3,45 +3,15 @@ if (localStorage.getItem("autoAccount") !== null) {
 } else if (localStorage.getItem("currentAccount") !== null) {
     pageAsAutoAccountLoggedIn("currentAccount")
 }
-var examInfo = [ // change exam display properties here
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    },
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    },
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    },
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    },
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    },
-    {
-        "examId": "exam_1",
-        "title": "Đề THPT số 16 - Phan Bội Châu - Lần 3",
-        "examType": "Trắc nghiệm",
-        "dateRelease": "27-6-2020",
-    }
+var examIdArr = [ // change exam display properties here
+    "exam_1",
+    "exam_1",
+    "exam_1",
+    "exam_1",
+    "exam_1",
+    "exam_1"
 ]
-displayExamStored(2, 3, examInfo)
+displayExamStored(2, 3, examIdArr)
 
 // ================================================================================
 
@@ -163,27 +133,72 @@ function removeErr(typeInput) {
     }
 }
 
+/**
+ * Import HTML into .display-exam for display exam item list
+ * @param {Number} row row amount to display
+ * @param {Number} displayPerRow item amount on a row
+ * @param {Array} examIdArr array of exam item to display
+ */
 function displayExamStored(row, displayPerRow, examIdArr) {
-    var displayHolder = $(".display-exam")
-    // display 3 exams per row
-    var examIdCount = 0
-    var htmlText = ""
-    for (let i = 1; i <= row; i++) {
-        htmlText += `<div class="row bg-light">`
+    let displayHolder = $(".display-exam")
+    let examIdCount = 0
+    for (let i = 0; i < row; i++) {
+        let htmlText = `<div class="row bg-light template-list"></div>`
+        displayHolder.append(htmlText)
         for (let j = 1; j <= displayPerRow; j++) {
-            htmlText +=
-                `<a href="database/exam/stored/` + examIdArr[examIdCount].examId + `/display.html" class="col-4 py-3 template-item" exam-data-id="` + examIdArr[examIdCount] + `">
-                <img src="database/exam/stored/` + examIdArr[examIdCount].examId + `/thumbnail.jpg" alt="thumbnail" width="100%" class="mb-3">
-                <p class="template-title font-weight-bold">` + examIdArr[examIdCount].title + `</p>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="template-muted text-muted">` + examIdArr[examIdCount].examType + `</p>
+            let examPath = "database/exam/stored/" + examIdArr[examIdCount]
+            let examJSPath = examPath + "/examInfo.json"
+            let examThumbnailPath = examPath + "/thumbnail.jpg"
+            $.getJSON(examJSPath, function (data) {
+                $(".display-exam").children().eq(i).append(
+                    `<a href="database/exam/stored/display.html" class="col-4 py-3 template-item" exam-data-id="` + examIdArr[examIdCount] + `">
+                        <img src="` + examThumbnailPath + `" alt="thumbnail" width="100%" class="mb-3">
+                        <p class="template-title font-weight-bold">` + data.title + `</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="template-muted text-muted">` + data.examType + `</p>
+                            </div>
+                            <div class="col-6 text-right text-muted template-muted">
+                                ` + data.dateRelease + `
+                            </div>
+                        </div>
+                    </a>`
+                )
+            })
+            examIdCount++
+        }
+    }
+}
+
+/**
+ * Import HTML into .display-exam for display exam item list
+ * @param {Number} row row amount to display
+ * @param {Number} displayPerRow item amount on a row
+ * @param {Array} examIdArr array of exam item to display
+ */
+function displayCourseStored(row, displayPerRow, examIdArr) {
+    let displayHolder = $(".display-course")
+    let examIdCount = 0
+    let htmlText = ""
+    for (let i = 1; i <= row; i++) {
+        htmlText += `<div class="row bg-light template-list">`
+        for (let j = 1; j <= displayPerRow; j++) {
+            let examPath = "database/exam/stored/" + examIdArr[examIdCount] + "/examInfo.json"
+            $.getJSON(examPath, function (data) {
+                htmlText +=
+                `<a href="database/exam/stored/display.html" class="col-4 py-3 template-item" exam-data-id="` + examIdArr[examIdCount] + `">
+                    <img src="database/exam/stored/` + examIdArr[examIdCount] + `/thumbnail.jpg" alt="thumbnail" width="100%" class="mb-3">
+                    <p class="template-title font-weight-bold">` + data.title + `</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="template-muted text-muted">` + data.examType + `</p>
+                        </div>
+                        <div class="col-6 text-right text-muted template-muted">
+                            ` + data.dateRelease + `
+                        </div>
                     </div>
-                    <div class="col-6 text-right text-muted template-muted">
-                        ` + examIdArr[examIdCount].dateRelease + `
-                    </div>
-                </div>
-            </a>`
+                </a>`
+            })
             examIdCount++
         }
         htmlText += `</div>`
