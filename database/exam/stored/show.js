@@ -26,7 +26,6 @@ function closeNav() {
 /* Change the HTML DOM as an account had been logged in */
 function pageAsAutoAccountLoggedIn(keyLocalStorage) {
     let userInfo = JSON.parse(localStorage.getItem(keyLocalStorage))
-
     let userName = userInfo.userName
     $("#loginForm").replaceWith(
         `<div id="accountSettings" class="container mt-4">
@@ -57,7 +56,7 @@ function pageAsAutoAccountLoggedIn(keyLocalStorage) {
                 </li>
             </ul>
         </div>
-        <a class="nav-link position-absolute d-flex align-items-center" href="index.html" style="bottom: 0;" onclick="logout()">
+        <a class="nav-link position-absolute d-flex align-items-center" href="../../../index.html" style="bottom: 0;" onclick="logout()">
             <i class="fas fa-sign-out-alt mr-2"></i>
             Đăng xuất
         </a>`
@@ -127,7 +126,7 @@ function logout() {
 function loadExam() {
     $.getJSON(examPath, function (data) {
         loadExamBody(data)
-        loadFeatureExamBody(data)
+        loadFeatureExamBody()
     })
 }
 
@@ -137,6 +136,17 @@ function loadExam() {
  */
 function loadExamDesc(examInfo) {
     let creatorInfo = JSON.parse(localStorage.getItem(examInfo.email))
+    let hour = examInfo.testDuration.hour
+    let minute = examInfo.testDuration.minute
+    let second = examInfo.testDuration.second
+    if (second > 60) {
+        minute += second / 60
+        second = second % 60
+    }
+    if (minute > 60) {
+        hour += minute / 60
+        minute = minute % 60
+    }
 
     $("#display").html(
         `<div class="row" id="authorInfo">
@@ -172,7 +182,7 @@ function loadExamDesc(examInfo) {
                             d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm216 248c0 118.7-96.1 216-216 216-118.7 0-216-96.1-216-216 0-118.7 96.1-216 216-216 118.7 0 216 96.1 216 216zm-148.9 88.3l-81.2-59c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h14c6.6 0 12 5.4 12 12v146.3l70.5 51.3c5.4 3.9 6.5 11.4 2.6 16.8l-8.2 11.3c-3.9 5.3-11.4 6.5-16.8 2.6z">
                         </path>
                     </svg>
-                    ` + examInfo.testDuration + ` phút
+                    ` + minute + ` phút
                 </div>
                 <div class="additional">
                     <svg aria-hidden="true" data-prefix="fal" data-icon="calendar-check" role="img"
@@ -201,11 +211,11 @@ function loadExamBody(examInfo) {
         openNav()
         return
     }
-    let htmlTextExamBody = 
-    `<div id="examBody">`
+    let htmlTextExamBody =
+        `<div id="examBody">`
     for (let i = 1; i <= examInfo.questionAmount; i++) {
         htmlTextExamBody +=
-        `<div class="question-item">
+            `<div class="question-item">
             <div class="question row" id="question_` + i + `">
                 Câu hỏi
             </div>
@@ -243,7 +253,7 @@ function loadExamBody(examInfo) {
                 <div class="col-8 answer-list-conclusion">
                     <div class="row">
                         <div class="answer-title col-12">Các câu đã làm</div>`
-                        
+
     let j = 1
     while (j <= examInfo.questionAmount) {
         htmlTextExamBody += `<div class="answered_block row col-12 d-flex justify-content-between">`
@@ -253,9 +263,9 @@ function loadExamBody(examInfo) {
         }
         htmlTextExamBody += `</div>`
     }
-    
+
     htmlTextExamBody +=
-                    `</div>
+        `</div>
                 </div>
             </div>
             <div class="row py-2 submit-block">
@@ -271,12 +281,12 @@ function loadExamBody(examInfo) {
     $("#sidenavBtn").attr("disabled", true)
 }
 
-function loadFeatureExamBody(examInfo) {
+function loadFeatureExamBody() {
     let qList = document.querySelectorAll(".question")
     let aList = document.querySelectorAll(".answer-list")
     let qStart = 0
     qList.forEach(element => {
-        aList[qStart].setAttribute("answer-data-id", qStart)
+        aList[qStart].setAttribute("answer-list-id", qStart + 1)
         element.innerHTML = `<img src="` + examId + `/question-images/q` + (qStart + 1) + `.jpeg" alt="q` + qStart + `" width="100%">`
         qStart++
     });
@@ -285,11 +295,11 @@ function loadFeatureExamBody(examInfo) {
         $(this).parent().siblings().children().addClass("btn-light")
         $(this).removeClass("btn-light")
         $(this).addClass("btn-primary")
-        let answerDataId = $(this).parent().parent().attr("answer-data-id")
+        let answerListId = $(this).parent().parent().attr("answer-list-id")
         let chooseAnswer = $(this).attr("data-answer")
-        examInfo.answerList[Number(answerDataId)].choose = chooseAnswer
-        $(".answered_item").eq(Number(answerDataId)).css("background-color", "#167AF6")
-        $(".answered_item").eq(Number(answerDataId)).css("color", "#FFFFFF")
+        $(this).parent().parent().attr("data-answer-choose", chooseAnswer)
+        $(".answered_item").eq(Number(answerListId) - 1).css("background-color", "#167AF6")
+        $(".answered_item").eq(Number(answerListId) - 1).css("color", "#FFFFFF")
     })
 }
 
@@ -393,20 +403,30 @@ function submitExam() {
 function scoreCalc() {
     $.getJSON(examPath, (data) => {
         let score = 0
+        let chooseAnswerList = []
+        document.querySelectorAll(".answer-list").forEach(element => {
+            if(element.getAttribute("data-answer-choose")) {
+                chooseAnswerList.push(element.getAttribute("data-answer-choose"))
+            } else {
+                chooseAnswerList.push("")
+            }
+        });
+
         let checkAnswerIndex = 0
-        data.answerList.forEach(element => {
-            if (element.choose == element.answer) {
+        let answerList = data.answerList
+        for (let i = 0; i < answerList.length; i++) {
+            if (chooseAnswerList[i] == answerList[i]) {
                 score++
-                let correctAnswer = $(".answer-list").eq(checkAnswerIndex).find("button.answer-item[data-answer|=" + element.choose + "]")
+                let correctAnswer = $(".answer-list").eq(checkAnswerIndex).find("button.answer-item[data-answer|=" + chooseAnswerList[i] + "]")
                 correctAnswer.removeClass("btn-primary")
                 correctAnswer.addClass("btn-success")
             } else {
-                let correctAnswer = $(".answer-list").eq(checkAnswerIndex).find("button.answer-item[data-answer|=" + element.answer + "]")
+                let correctAnswer = $(".answer-list").eq(checkAnswerIndex).find("button.answer-item[data-answer|=" + answerList[i] + "]")
                 correctAnswer.removeClass("btn-light")
                 correctAnswer.addClass("btn-danger")
             }
             checkAnswerIndex++
-        })
+        }
         alert("Bài làm của bạn được " + score + " điểm!")
         $(".fixed-bottom").html(
             `<div class="row d-flex justify-content-center py-2">

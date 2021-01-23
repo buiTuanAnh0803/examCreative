@@ -28,7 +28,6 @@ function closeNav() {
 /* Change the HTML DOM as an account had been logged in */
 function pageAsAutoAccountLoggedIn(keyLocalStorage) {
     let userInfo = JSON.parse(localStorage.getItem(keyLocalStorage))
-
     let userName = userInfo.userName
     $("#greetingText").text("Xin chào, ")
     $("#greetingText").css("font-family", "'Lobster', cursive")
