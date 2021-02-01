@@ -16,7 +16,7 @@
             <img src="../../images/logo.png" alt="logo-login" width="50%">
         </div>
         <div class="py-4" style="font-size: 12px;">
-            Khi có tài khoản Exam24h bạn có thể Theo dõi, bình luận tất cả các bài viết cũng như có thể tạo đề thi. Đăng
+            Khi có tài khoản ExamCreative bạn có thể Theo dõi, bình luận tất cả các bài viết cũng như có thể tạo đề thi. Đăng
             ký chỉ trong vài giây.
         </div>
         <form autocomplete="off" style="width: 100%;">
@@ -57,16 +57,18 @@
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="checkLoginAfterSuccessfullyRegister">
                 <label class="form-check-label" for="checkLoginAfterSuccessfullyRegister" style="font-size: 12px;">
-                    Đăng nhập ngay sau khi đăng ký thành công
+                    Đăng nhập ngay sau khi đăng ký thành công (tự động đăng nhập)
                 </label>
             </div>
-            <button type="button" class="btn btn-primary" onclick="registerEmailToLocalStorage()">Đăng ký</button>
+            <button type="button" class="btn btn-primary" onclick="registerEmailToTheMock()">Đăng ký</button>
         </form>
     </div>
     <button class="btn btn-dark" style="position: absolute; top: 2%; left: 2%;">
         <a href="../../index.html" style="text-decoration: none; color: white;  ">< Quay lại trang chủ</a>
     </button>
-
+    <div class="cover-loader d-none justify-content-center align-items-center">
+        <div class="spinner-border"></div>
+    </div>
 
     <script src="../../bootstrap/jquery-3.5.1.slim.min.js"></script>
     <script src="../../bootstrap/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>

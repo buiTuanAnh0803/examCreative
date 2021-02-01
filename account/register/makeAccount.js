@@ -22,20 +22,22 @@ function showPassword2() {
     }
 }
 
-function registerEmailToLocalStorage() {
+function isRegisterInfoSuccess() {
     removeErrorText('passwordAgain')
     if (checkEmptyInput() == false) {   // check all input field is empty or not
+        loadingSpin(false)
         return
     } else {
-        if (isEmailFormatCorrected() == false) {
+        if (!isEmailFormatCorrected()) {
             let emailHelp = document.getElementById("emailHelp")
             emailHelp.innerText = "Email này hiện không khả dụng!";
             emailHelp.classList.remove("d-none")
             emailHelp.classList.replace("text-muted", "text-danger")
             alert("Hãy nhập đúng format email.")
         } else {
-            if (isEmailExisted() == false) {    // current email doesn't exist in localStage
-                if (checkPasswordAgain() == false) {    // the re-input password doesn't match with the origimal one
+            let checkEmail = $("#email").attr("email-exist-result")
+            if (checkEmail == false || checkEmail == "false") {    // current email doesn't exist in localStage
+                if (!checkPasswordAgain()) {    // the re-input password doesn't match with the origimal one
                     let passwordAgainHelp = document.getElementById("passwordAgainHelp")
                     passwordAgainHelp.classList.remove("d-none")
                     alert("Nhập mật khẩu lần hai không trùng khớp.")
@@ -43,18 +45,26 @@ function registerEmailToLocalStorage() {
                     let email = document.getElementById("email");
                     let userName = document.getElementById("name");
                     let passwordRegister = document.getElementById("password");
-                    let userInfoToLocalStorage = {
+                    let userInfoToTheMock = {
                         email: email.value,
                         userName: userName.value,
                         password: passwordRegister.value,
                     }
-                    localStorage.setItem(email.value, JSON.stringify(userInfoToLocalStorage))
-                    if (document.getElementById("checkLoginAfterSuccessfullyRegister").checked) {
-                        localStorage.setItem("currentAccount", JSON.stringify(userInfoToLocalStorage))
-                        localStorage.setItem("autoAccount", JSON.stringify(userInfoToLocalStorage))
-                    }
-                    alert("Đăng ký tài khoản thành công!")
-                    window.location.assign("../../index.html")
+                    $.ajax({
+                        url: "https://6010ce9a91905e0017be395b.mockapi.io/account",
+                        method: "POST",
+                        data: userInfoToTheMock
+                    }).done((data) => {
+                        if (document.getElementById("checkLoginAfterSuccessfullyRegister").checked) {
+                            let userStatus = {
+                                id: data.id,
+                                autoLogin: true
+                            }
+                            localStorage.setItem("userStatus", JSON.stringify(userStatus))
+                        }
+                        alert("Đăng ký tài khoản thành công!")
+                        window.location.assign("../../index.html")
+                    })
                 }
             } else {    // current email existd in localStage
                 let emailHelp = document.getElementById("emailHelp")
@@ -62,8 +72,10 @@ function registerEmailToLocalStorage() {
                 emailHelp.classList.remove("d-none")
                 emailHelp.classList.replace("text-muted", "text-danger")
                 alert("Email này đã có người sử dụng.")
+                $("#email").removeAttr("email-exist-result")
             }
         }
+        loadingSpin(false)
     }
 }
 
@@ -101,14 +113,31 @@ function isEmailFormatCorrected() {
     return result
 }
 
-function isEmailExisted() {
-    let result = true
-    let emailRegister = document.getElementById("email");
-    let queryId = localStorage.getItem(emailRegister.value)
-    if (queryId == undefined) {
-        result = false
-    }
-    return result
+function registerEmailToTheMock() {
+    //  check the register email is existed or not then import result to #email
+    let emailRegister = $("#email");
+    $.ajax({
+        url: "https://6010ce9a91905e0017be395b.mockapi.io/account/?email=" + emailRegister.val(),
+        method: "GET",
+        beforeSend: function () {
+            loadingSpin(true)
+        },
+        success: function (data) {
+            $("#email").attr("email-exist-result", false)
+            if (data.length != 0) {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    if (element.email == emailRegister.val()) {
+                        $("#email").attr("email-exist-result", true)
+                        break
+                    }
+                }
+            }
+        }
+    }).done(() => {
+        //  check the register form is correct or error
+        isRegisterInfoSuccess()
+    })
 }
 
 function checkPasswordAgain() {
@@ -125,5 +154,19 @@ function removeErrorText(field) {
     let fieldHelp = document.getElementById(field + "Help")
     if (fieldHelp.classList.contains("text-danger")) {
         fieldHelp.classList.add("d-none")
+    }
+}
+
+/**
+ * Display or hide the cover page spinner
+ * @param {Boolean} status if status = true, display the spinner; otherwise status = false, hide the spinner
+ */
+function loadingSpin(status) {
+    if (status) {
+        $(".cover-loader").removeClass("d-none")
+        $(".cover-loader").addClass("d-flex")
+    } else {
+        $(".cover-loader").removeClass("d-flex")
+        $(".cover-loader").addClass("d-none")
     }
 }

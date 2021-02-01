@@ -4,7 +4,7 @@
     }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 #search-form {
@@ -80,9 +80,16 @@
     padding-left: 5%;
 }
 
-.sidenav input {
+.sidenav #loginEmail, .sidenav #loginPassword {
     margin-left: 5%;
+    margin-right: 5%;
     width: 90%;
+}
+
+.sidenav #autoLogin {
+    margin-top: 0;
+    margin-left: -3%;
+    height: 34px;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -99,11 +106,6 @@
     right: 2%;
     font-size: 36px;
     margin-left: 50px;
-}
-
-#autoLogin {
-    top: 20%;
-    left: -43%;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -124,6 +126,27 @@
     }
 }
 
+/* Set the loading spinner */
+
+.cover-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: rgba(128, 128, 128, 0.596);
+}
+
+.spinner-border {
+    width: 80px;
+    height: 80px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* =========================================================================================== */
+
 .template-title {
     font-size: 14px;
 }
@@ -135,8 +158,4 @@
 .template-item:hover {
     cursor: pointer;
     background-color: rgb(180, 180, 180);
-}
-
-a:hover {
-    text-decoration: none;
 }

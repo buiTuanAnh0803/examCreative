@@ -51,3 +51,16 @@ body {
         transform: scaleY(1)
     }
 }
+
+.cover-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: rgba(128, 128, 128, 0.596);
+}
+
+.spinner-border {
+    width: 80px;
+    height: 80px;
+}

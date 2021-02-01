@@ -136,7 +136,6 @@ function loadExam() {
  */
 function loadExamDesc(examInfo) {
     let creatorInfo = JSON.parse(localStorage.getItem(examInfo.email))
-    let hour = examInfo.testDuration.hour
     let minute = examInfo.testDuration.minute
     let second = examInfo.testDuration.second
     if (second > 60) {
@@ -344,14 +343,16 @@ function timeCount() {
         minute: 0,
         second: 0
     }
-    if (currentTimeDuration.second < 1 && currentTimeDuration.minute > 0) {
-        nextTimeDuration.hour = currentTimeDuration.hour
-        nextTimeDuration.minute = currentTimeDuration.minute - 1
-        nextTimeDuration.second = 59
-    } else if (currentTimeDuration.second < 1 && currentTimeDuration.minute == 0) {
-        nextTimeDuration.hour = currentTimeDuration.hour - 1
-        nextTimeDuration.minute = 59
-        nextTimeDuration.second = 59
+    if (currentTimeDuration.second < 1) {
+        if (currentTimeDuration.minute < 1) {
+            nextTimeDuration.hour = currentTimeDuration.hour - 1
+            nextTimeDuration.minute = 59
+            nextTimeDuration.second = 59
+        } else {
+            nextTimeDuration.hour = currentTimeDuration.hour
+            nextTimeDuration.minute = currentTimeDuration.minute - 1
+            nextTimeDuration.second = 59
+        } 
     } else {
         nextTimeDuration.hour = currentTimeDuration.hour
         nextTimeDuration.minute = currentTimeDuration.minute
