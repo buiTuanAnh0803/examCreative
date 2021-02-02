@@ -1,4 +1,4 @@
-@media only screen and (max-width: 1140px) and (min-width: 992px) {
+@media only screen and (min-width: 992px) and (max-width: 1140px) {
     .menu-text {
         display: none;
     }

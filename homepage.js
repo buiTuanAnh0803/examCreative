@@ -17,10 +17,14 @@ function beforeLoadingPage() {
     let userStatusPage = JSON.parse(localStorage.getItem("userStatus"))
     let accessCount = sessionStorage.getItem("accessCount")
     if (accessCount) {
-        importUserInfo(userStatusPage.id)
+        //  already access to the page
+        if (userStatusPage !== null) {
+            importUserInfo(userStatusPage.id)
+        }
     } else {
+        //  the user access the page for the first time
         sessionStorage.setItem("accessCount", 0)
-        if (userStatusPage) {
+        if (userStatusPage !== null) {
             if (userStatusPage.autoLogin) {
                 importUserInfo(userStatusPage.id)
             }
