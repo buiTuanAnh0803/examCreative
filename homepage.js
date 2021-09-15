@@ -11,12 +11,24 @@ var examIdArr = [
 displayExamStored(2, 3, examIdArr)
 
 // ================================================================================
+  
+//  Add event when pressing Enter key on input email and password
+$("#loginPassword").keyup((e) => {
+    if (e.which == 13) {
+        manualLogin()
+    }
+})
+$("#loginEmail").keyup((e) => {
+    if (e.which == 13) {
+        $("#loginPassword").focus()
+    }
+})
 
 /* Check the user login info before loading page */
 function beforeLoadingPage() {
     let userStatusPage = JSON.parse(localStorage.getItem("userStatus"))
     let accessCount = sessionStorage.getItem("accessCount")
-    if (accessCount) {
+    if (accessCount !== null) {
         //  already access to the page
         if (userStatusPage !== null) {
             importUserInfo(userStatusPage.id)

@@ -1,6 +1,9 @@
 @media only screen and (min-width: 992px) and (max-width: 1140px) {
     .menu-text {
-        display: none;
+        font-size: 0.7rem;
+    }
+    i.fas {
+        font-size: 0.7rem
     }
 }
 
